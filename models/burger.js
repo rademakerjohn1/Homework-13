@@ -9,14 +9,14 @@ var burger = {
     });
   },
   
-  // Creates new data according to what is passed in, does something with results
+  // Runs query to insert data into the given column(s) in the burgers table and does something with result
   create: function(cols, vals, cb) {
     orm.create("burgers", cols, vals, function(res) {
       cb(res);
     });
   },
 
-  // Updates whatever data is selected and does something with results
+  // Updates the burgers table where a given condition is met, does something with result
   update: function(objColVals, condition, cb) {
     orm.update("burgers", objColVals, condition, function(res) {
       cb(res);
