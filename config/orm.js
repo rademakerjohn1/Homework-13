@@ -25,7 +25,7 @@ var orm = {
 
   // Runs a query to select all from a table and do something with the result
   all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
+    var queryString = `SELECT * FROM ${tableInput};`;
     connection.query(queryString, function(err, result) {
       if (err) {throw err};
       cb(result);
@@ -34,9 +34,7 @@ var orm = {
 
   // Runs a query to insert data into a given table's given column(s) and do something with result
   create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
-    queryString += " (" + cols.toString() + ") ";
-    queryString += "VALUES (" + printQuestionMarks(vals.length) + "); ";
+    var queryString = `INSERT INTO ${table} (${cols.toString()}) VALUES (${printQuestionMarks(vals.length)});`;
     connection.query(queryString, vals, function(err, result) {
       if (err) {throw err};
       cb(result);
@@ -45,9 +43,7 @@ var orm = {
 
   // Runs a query to update a given table where a given condition is met and do something with result
   update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
-    queryString += " SET " + objToSql(objColVals);
-    queryString += " WHERE " + condition;
+    var queryString = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition};`;
     connection.query(queryString, function(err, result) {
       if (err) {throw err};
       cb(result);
